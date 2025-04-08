@@ -1,4 +1,4 @@
-# 🎤 AI Interviewer App
+# 🎤 Juno
 
 An AI-powered app to help you practice and prepare for technical interviews through dynamic question generation, real-time feedback, and a modern developer-friendly interface.
 
@@ -7,9 +7,6 @@ An AI-powered app to help you practice and prepare for technical interviews thro
 ## 🤖 Introduction
 
 This project is built with **Next.js**, **React**, **Firebase** for authentication, **Zod** for validation, and **Tailwind CSS** for styling. It simulates technical interviews with the help of AI, giving you instant feedback and helping you grow your problem-solving skills in a realistic, interactive way.
-
-Inspired by the [Prepwise project](https://github.com/adrianhajdin/ai_mock_interviews), I built this version using TypeScript and customized it to fit my own learning and development style.
-
 ---
 
 ## ⚙️ Tech Stack
@@ -41,16 +38,14 @@ Inspired by the [Prepwise project](https://github.com/adrianhajdin/ai_mock_inter
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-interviewer-app.git
-cd ai-interviewer-app
+git clone https://github.com/MadMax-5000/juno.git
+cd juno
 ```
 
 ### 2. Install Dependencies
 
 ```bash
 npm install
-# or
-pnpm install
 ```
 
 ### 3. Environment Variables
