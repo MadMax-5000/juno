@@ -1,84 +1,8 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+
+@plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
-
-/* SF Pro Display - Regular */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* SF Pro Display - Bold */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYBOLD.OTF") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-/* SF Pro Display - Black Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYBLACKITALIC.OTF") format("opentype");
-  font-weight: 900;
-  font-style: italic;
-}
-
-/* SF Pro Display - Heavy Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYHEAVYITALIC.OTF") format("opentype");
-  font-weight: 800;
-  font-style: italic;
-}
-
-/* SF Pro Display - Light Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYLIGHTITALIC.OTF") format("opentype");
-  font-weight: 300;
-  font-style: italic;
-}
-
-/* SF Pro Display - Medium */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYMEDIUM.OTF") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-/* SF Pro Display - SemiBold Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF") format("opentype");
-  font-weight: 600;
-  font-style: italic;
-}
-
-/* SF Pro Display - Thin Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYTHINITALIC.OTF") format("opentype");
-  font-weight: 100;
-  font-style: italic;
-}
-
-/* SF Pro Display - UltraLight Italic */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("/fonts/SFPRODISPLAYULTRALIGHTITALIC.OTF") format("opentype");
-  font-weight: 200;
-  font-style: italic;
-}
-
-/* Optional utility class */
-.font-sf {
-  font-family: "SF Pro Display", sans-serif;
-}
 
 @theme {
   --color-success-100: #49de50;
@@ -101,44 +25,6 @@
   --font-mona-sans: "Mona Sans", sans-serif;
 
   --bg-pattern: url("/pattern.png");
-}
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
@@ -188,7 +74,7 @@
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: var(--light-100);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -208,6 +94,44 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -367,44 +291,5 @@
     .badge-text {
       @apply text-sm font-semibold capitalize;
     }
-  }
-}
-
-@utility dark-gradient {
-  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
-}
-
-@utility border-gradient {
-  @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
-}
-
-@utility pattern {
-  @apply bg-[url('/pattern.png')] bg-top bg-no-repeat;
-}
-
-@utility blue-gradient-dark {
-  @apply bg-gradient-to-b from-[#171532] to-[#08090D];
-}
-
-@utility blue-gradient {
-  @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
-}
-
-@utility flex-center {
-  @apply flex items-center justify-center;
-}
-
-@utility animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
