@@ -2,22 +2,13 @@
 
 import { z } from "zod";
 import Link from "next/link";
-import Image from "next/image";
 import { toast } from "sonner";
-import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-
-import { signIn, signUp } from "@/lib/actions/auth.action";
+import { Form } from "@/app/components/ui/form";
+import { Button } from "@/app/components/ui/button";
 import FormField from "./FormField";
 
 const authFormSchema = (type: FormType) => {
@@ -30,6 +21,7 @@ const authFormSchema = (type: FormType) => {
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
+  const isSignIn = type === "sign-in";
 
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,50 +36,9 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       if (type === "sign-up") {
-        const { name, email, password } = data;
-
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        const result = await signUp({
-          uid: userCredential.user.uid,
-          name: name!,
-          email,
-          password,
-        });
-
-        if (!result.success) {
-          toast.error(result.message);
-          return;
-        }
-
-        toast.success("Account created successfully. Please sign in.");
-        router.push("/sign-in");
+        toast.info("Firebase sign-up logic is currently disabled.");
       } else {
-        const { email, password } = data;
-
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        const idToken = await userCredential.user.getIdToken();
-        if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
-          return;
-        }
-
-        await signIn({
-          email,
-          idToken,
-        });
-
-        toast.success("Signed in successfully.");
-        router.push("/");
+        toast.info("Firebase sign-in logic is currently disabled.");
       }
     } catch (error) {
       console.log(error);
@@ -95,22 +46,18 @@ const AuthForm = ({ type }: { type: FormType }) => {
     }
   };
 
-  const isSignIn = type === "sign-in";
-
   return (
-    <div className="lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center">
-          <h2 className="text-white">Juno</h2>
+    <div className="w-full max-w-md mx-auto px-6">
+      <div className="bg-[#0A0A0A] border border-neutral-800 rounded-2xl px-8 py-12 shadow-md space-y-8">
+        <div className="text-center space-y-2">
+          <h2 className="text-white text-3xl font-semibold">Juno</h2>
+          <p className="text-gray-400 text-sm">
+            Practice job interviews with AI
+          </p>
         </div>
 
-        <h3>Practice job interviews with AI</h3>
-
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 mt-4 form"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {!isSignIn && (
               <FormField
                 control={form.control}
@@ -137,17 +84,20 @@ const AuthForm = ({ type }: { type: FormType }) => {
               type="password"
             />
 
-            <Button className="btn" type="submit">
+            <Button
+              className="w-full bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-2 px-4 rounded-md transition"
+              type="submit"
+            >
               {isSignIn ? "Sign In" : "Create an Account"}
             </Button>
           </form>
         </Form>
 
-        <p className="text-center">
+        <p className="text-center text-sm text-gray-500">
           {isSignIn ? "No account yet?" : "Have an account already?"}
           <Link
             href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-bold ml-1"
+            className="text-[#3ECF8E] ml-1 hover:underline"
           >
             {!isSignIn ? "Sign In" : "Sign Up"}
           </Link>
