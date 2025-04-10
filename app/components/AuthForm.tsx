@@ -8,15 +8,13 @@ import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-
+import { Form } from "./ui/form";
+import { Button } from "./ui/button";
 import { signIn, signUp } from "@/lib/actions/auth.action";
 import FormField from "./FormField";
 
@@ -24,12 +22,13 @@ const authFormSchema = (type: FormType) => {
   return z.object({
     name: type === "sign-up" ? z.string().min(3) : z.string().optional(),
     email: z.string().email(),
-    password: z.string().min(3),
+    password: z.string().min(6),
   });
 };
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
+  const isSignIn = type === "sign-in";
 
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,7 +58,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           password,
         });
 
-        if (!result.success) {
+        if (!result?.success) {
           toast.error(result.message);
           return;
         }
@@ -77,7 +76,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
         const idToken = await userCredential.user.getIdToken();
         if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
+          toast.error("Sign in failed. Please try again.");
           return;
         }
 
@@ -95,22 +94,19 @@ const AuthForm = ({ type }: { type: FormType }) => {
     }
   };
 
-  const isSignIn = type === "sign-in";
-
   return (
-    <div className="lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 card py-14 px-10">
-        <div className="flex flex-row gap-2 justify-center">
-          <h2 className="text-white">Juno</h2>
+    <div className="w-full max-w-md mx-auto px-6 selection:bg-[#3ECF8E] selection:text-black">
+      <div className="bg-[#0A0A0A] border border-neutral-800 rounded-2xl px-8 py-12 shadow-md space-y-8">
+        <div className="flex items-center justify-center space-x-2">
+          <h2 className="text-white text-4xl font-semibold">Juno</h2>
         </div>
 
-        <h3>Practice job interviews with AI</h3>
+        <p className="text-center text-gray-400 text-lg">
+          Practice job interviews with AI
+        </p>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 mt-4 form"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-4">
             {!isSignIn && (
               <FormField
                 control={form.control}
@@ -137,17 +133,20 @@ const AuthForm = ({ type }: { type: FormType }) => {
               type="password"
             />
 
-            <Button className="btn" type="submit">
+            <Button
+              className="w-full bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-2 px-4 rounded-md transition"
+              type="submit"
+            >
               {isSignIn ? "Sign In" : "Create an Account"}
             </Button>
           </form>
         </Form>
 
-        <p className="text-center">
+        <p className="text-center text-sm text-gray-500">
           {isSignIn ? "No account yet?" : "Have an account already?"}
           <Link
             href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-bold ml-1"
+            className="text-[#3ECF8E] ml-1 hover:underline"
           >
             {!isSignIn ? "Sign In" : "Sign Up"}
           </Link>
