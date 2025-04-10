@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk"; 
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/actions/general.action";
+import { Phone, PhoneOff, Mic } from "lucide-react";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -145,77 +144,130 @@ const Agent = ({
     vapi.stop();
   };
 
+  // Generate random colors for Vercel-like avatar
+  const generateGradient = () => {
+    const colors = [
+      ['#FF4D4D', '#FF9999'],
+      ['#3ECF8E', '#35b87c'],
+      ['#6366F1', '#818CF8'],
+      ['#F59E0B', '#FCD34D'],
+      ['#8B5CF6', '#A78BFA']
+    ];
+    const randomPair = colors[Math.floor(Math.random() % colors.length)];
+    return `linear-gradient(135deg, ${randomPair[0]} 0%, ${randomPair[1]} 100%)`;
+  };
+
   return (
-    <>
-      <div className="flex sm:flex-row flex-col gap-10 items-center justify-between w-full">
-        <div className="flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full">
-          <div className="z-10 flex items-center justify-center blue-gradient rounded-full size-[120px] relative">
-            <Image
-              src="/ai-avatar.png"
-              alt="profile-image"
-              width={65}
-              height={54}
-              className="object-cover"
-            />
-            {isSpeaking && <span className="absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-200 opacity-75" />}
+    <div className="flex flex-col gap-5 w-full">
+      <div className="flex sm:flex-row flex-col gap-5 items-stretch justify-between w-full">
+        {/* AI Interviewer Card */}
+        <div className="bg-gradient-to-br from-[#0c0c0c] to-[#121212] border border-neutral-800 rounded-xl px-4 py-5 flex-1 flex flex-col items-center justify-center shadow-md h-[320px]">
+          <div className="relative mb-4">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#3ECF8E]/20 to-[#35b87c]/20 rounded-full blur-lg"></div>
+            <div className="relative z-10 bg-gradient-to-br from-[#3ECF8E] to-[#35b87c] rounded-full w-20 h-20 flex items-center justify-center">
+              {isSpeaking && (
+                <span className="absolute inline-flex w-full h-full animate-ping rounded-full bg-[#3ECF8E] opacity-30"></span>
+              )}
+              <div className="bg-black/30 backdrop-blur-sm rounded-full p-4">
+                <Mic size={24} className="text-white" />
+              </div>
+            </div>
           </div>
-          <h3>AI Interviewer</h3>
+          <div className="inline-block bg-black/40 backdrop-blur-md border border-neutral-700 px-3 py-1 rounded-full mb-2">
+            <span className="text-[#3ECF8E] text-base font-medium">
+              AI Interviewer
+            </span>
+          </div>
+          <p className="text-gray-400 text-base text-center">
+            {isSpeaking ? "Speaking..." : callStatus === CallStatus.ACTIVE ? "Listening..." : "Ready for interview"}
+          </p>
+          
+          {callStatus === CallStatus.ACTIVE && (
+            <div className="mt-4 flex space-x-1">
+              <span className="w-2 h-2 bg-[#3ECF8E] rounded-full animate-pulse"></span>
+              <span className="w-2 h-2 bg-[#3ECF8E] rounded-full animate-pulse delay-100"></span>
+              <span className="w-2 h-2 bg-[#3ECF8E] rounded-full animate-pulse delay-200"></span>
+            </div>
+          )}
         </div>
 
         {/* User Profile Card */}
-        <div className="border-gradient p-0.5 rounded-2xl flex-1 sm:basis-1/2 w-full h-[400px] max-md:hidden">
-          <div className="flex flex-col gap-2 justify-center items-center p-7 dark-gradient rounded-2xl min-h-full">
-            <Image
-              src="/user-avatar.png"
-              alt="profile-image"
-              width={539}
-              height={539}
-              className="rounded-full object-cover size-[120px]"
-            />
-            <h3>{userName}</h3>
+        <div className="bg-gradient-to-br from-[#0c0c0c] to-[#121212] border border-neutral-800 rounded-xl px-4 py-5 flex-1 flex flex-col items-center justify-center shadow-md h-[320px] max-md:hidden">
+          <div className="relative mb-4">
+            <div 
+              className="relative z-10 rounded-full w-20 h-20 flex items-center justify-center shadow-md" 
+              style={{ background: generateGradient() }}
+            >
+              <span className="text-white text-2xl font-bold">
+                {userName ? userName.charAt(0).toUpperCase() : "U"}
+              </span>
+            </div>
           </div>
+          <div className="inline-block bg-black/40 backdrop-blur-md border border-neutral-700 px-3 py-1 rounded-full mb-2">
+            <span className="text-white text-base ">
+              Candidate
+            </span>
+          </div>
+          <p className="text-gray-300 font-medium">{userName}</p>
+          
+          {callStatus === CallStatus.ACTIVE && !isSpeaking && (
+            <div className="mt-4 px-3 py-1 bg-neutral-800/50 rounded-full">
+              <span className="text-gray-400 text-xs">Your turn to speak</span>
+            </div>
+          )}
         </div>
       </div>
 
+      {/* Transcript Section */}
       {messages.length > 0 && (
-        <div className="transcript-border">
-          <div className="transcript">
-            <p
-              key={lastMessage}
-              className={cn(
-                "transition-opacity duration-500 opacity-0",
-                "animate-fadeIn opacity-100"
-              )}
-            >
-              {lastMessage}
-            </p>
+        <div className="bg-gradient-to-br from-[#0c0c0c] to-[#121212] border border-neutral-800 rounded-xl p-4 w-full">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="size-2 bg-[#3ECF8E] rounded-full"></div>
+            <span className="text-sm font-medium text-white">Latest Message</span>
           </div>
+          <p className={cn(
+              "text-gray-300 text-sm animate-fadeIn opacity-100",
+              "transition-opacity duration-500"
+            )}>
+            {lastMessage}
+          </p>
         </div>
       )}
 
-      <div className="w-full flex justify-center">
-        {callStatus !== "ACTIVE" ? (
-          <button className="relative inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible" onClick={() => handleCall()}>
-            <span
-              className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                callStatus !== "CONNECTING" && "hidden"
-              )}
-            />
-
-            <span className="relative">
-              {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Call"
-                : ". . ."}
-            </span>
+      {/* Call Controls */}
+      <div className="w-full flex justify-center pt-2">
+        {callStatus !== CallStatus.ACTIVE ? (
+          <button 
+            onClick={() => handleCall()}
+            className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-3 px-6 rounded-lg transition text-sm shadow-lg shadow-[#3ECF8E]/20 flex items-center gap-2 cursor-pointer"
+          >
+            {callStatus === CallStatus.CONNECTING ? (
+              <>
+                <div className="animate-pulse flex items-center gap-1">
+                  <span className="w-1 h-1 bg-black rounded-full"></span>
+                  <span className="w-1 h-1 bg-black rounded-full"></span>
+                  <span className="w-1 h-1 bg-black rounded-full"></span>
+                </div>
+                <span className="ml-1">Connecting</span>
+              </>
+            ) : (
+              <>
+                <Phone size={16} />
+                <span>Start Interview</span>
+              </>
+            )}
           </button>
         ) : (
-          <button className="inline-block px-7 py-3 text-sm font-bold leading-5 text-white transition-colors duration-150 bg-destructive-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-destructive-200 hover:bg-destructive-200 min-w-28" onClick={() => handleDisconnect()}>
-            End
+          <button 
+            onClick={() => handleDisconnect()}
+            className="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-6 rounded-lg transition text-sm shadow-lg shadow-red-500/20 flex items-center gap-2"
+          >
+            <PhoneOff size={16} />
+            <span>End Interview</span>
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

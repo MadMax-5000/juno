@@ -134,7 +134,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             />
 
             <Button
-              className="w-full bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-2 px-4 rounded-md transition"
+              className="cursor-pointer w-full bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-2 px-4 rounded-md transition"
               type="submit"
             >
               {isSignIn ? "Sign In" : "Create an Account"}
