@@ -38,7 +38,15 @@ const Page = () => {
           </div>
           <div className="hidden lg:block relative w-72 h-72">
             <div className="absolute inset-0 bg-gradient-to-r from-[#3ECF8E]/20 to-[#35b87c]/20 rounded-full blur-3xl"></div>
-            <div className="relative z-10 bg-gradient-to-br from-[#3ECF8E] to-[#35b87c] rounded-3xl w-full h-full opacity-90 shadow-2xl"></div>
+            <div className="relative z-10 bg-gradient-to-br from-[#3ECF8E] to-[#35b87c] rounded-3xl w-full h-full opacity-90 shadow-2xl flex justify-center items-center">
+              {/* SVG Icon */}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="200" height="200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="16" y="8" width="32" height="48" rx="4" fill="#3ECF8E"/>
+                <path d="M20 32l8 8l16 -16" stroke="white" strokeWidth="3" fill="none"/>
+                <rect x="16" y="8" width="32" height="48" rx="4" stroke="#2B8F61" strokeWidth="2" fill="none"/>
+                <rect x="25" y="6" width="14" height="4" fill="#2B8F61"/>
+              </svg>
+            </div>
           </div>
         </div>
       </section>

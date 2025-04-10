@@ -28,8 +28,8 @@ const InterviewCard = ({
             <Image
               src={getRandomInterviewCover()}
               alt="Interview cover"
-              width={48}
-              height={48}
+              width={38}
+              height={38}
               className="rounded-xl object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent"></div>
