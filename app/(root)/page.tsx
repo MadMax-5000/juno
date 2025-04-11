@@ -4,8 +4,20 @@ import Link from "next/link";
 import React from "react";
 import InterviewCard from "../components/InterviewCard";
 import { ArrowRight, PlusCircle } from "lucide-react";
+import { getCurrentUser } from "@/lib/actions/auth.action";
+import {
+  getInterviewsByUserId,
+  getLatestInterviews,
+} from "@/lib/actions/general.action";
 
-const Page = () => {
+const Page = async () => {
+  const user = await getCurrentUser();
+  const [userInterviews, latestInterviews] = await Promise.all([
+    await getInterviewsByUserId(user?.id!),
+    await getLatestInterviews({ userId: user?.id! }),
+  ]);
+  const hasPassedInterviews = userInterviews?.length! > 0;
+  const hasUpcomingInterviews = latestInterviews?.length! > 0;
   return (
     <div className="bg-black min-h-screen pb-20">
       {/* Hero Section */}
@@ -40,11 +52,42 @@ const Page = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#3ECF8E]/20 to-[#35b87c]/20 rounded-full blur-3xl"></div>
             <div className="relative z-10 bg-gradient-to-br from-[#3ECF8E] to-[#35b87c] rounded-3xl w-full h-full opacity-90 shadow-2xl flex justify-center items-center">
               {/* SVG Icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="200" height="200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="16" y="8" width="32" height="48" rx="4" fill="#3ECF8E"/>
-                <path d="M20 32l8 8l16 -16" stroke="white" strokeWidth="3" fill="none"/>
-                <rect x="16" y="8" width="32" height="48" rx="4" stroke="#2B8F61" strokeWidth="2" fill="none"/>
-                <rect x="25" y="6" width="14" height="4" fill="#2B8F61"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                width="200"
+                height="200"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect
+                  x="16"
+                  y="8"
+                  width="32"
+                  height="48"
+                  rx="4"
+                  fill="#3ECF8E"
+                />
+                <path
+                  d="M20 32l8 8l16 -16"
+                  stroke="white"
+                  strokeWidth="3"
+                  fill="none"
+                />
+                <rect
+                  x="16"
+                  y="8"
+                  width="32"
+                  height="48"
+                  rx="4"
+                  stroke="#2B8F61"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <rect x="25" y="6" width="14" height="4" fill="#2B8F61" />
               </svg>
             </div>
           </div>
@@ -66,9 +109,13 @@ const Page = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dummyInterviews.slice(0, 3).map((interview) => (
-            <InterviewCard key={interview.id} {...interview} />
-          ))}
+          {hasPassedInterviews ? (
+            userInterviews?.map((interview) => (
+              <InterviewCard key={interview.id} {...interview} />
+            ))
+          ) : (
+            <p>You haven&pos;t taken any interviews yet</p>
+          )}
         </div>
       </section>
 
@@ -90,9 +137,13 @@ const Page = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dummyInterviews.map((interview) => (
+          {hasUpcomingInterviews ? (
+            latestInterviews?.map((interview) => (
               <InterviewCard key={interview.id} {...interview} />
-            ))}
+            ))
+          ) : (
+            <p>There are no new interviews available</p>
+          )}
           </div>
         </div>
       </section>

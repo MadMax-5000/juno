@@ -130,3 +130,16 @@ export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
 }
+
+// get interviews from the current user
+export async function getInterviewsbyId(userId: string) {
+  const interviews = await db
+  .collection("interviews")
+  .where("userId", "==", userId)
+  .orderBy("createdAt", "desc")
+  .get()
+
+  return interviews.docs.map((doc) => ({
+    
+  }))
+}

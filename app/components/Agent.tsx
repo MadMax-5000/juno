@@ -198,7 +198,7 @@ const Agent = ({
               className="relative z-10 rounded-full w-20 h-20 flex items-center justify-center shadow-md" 
               style={{ background: generateGradient() }}
             >
-              <span className="text-white text-2xl font-bold">
+              <span className="text-white text-4xl font-bold">
                 {userName ? userName.charAt(0).toUpperCase() : "U"}
               </span>
             </div>
@@ -252,8 +252,8 @@ const Agent = ({
               </>
             ) : (
               <>
-                <Phone size={16} />
-                <span>Start Interview</span>
+                <Phone size={20} />
+                <span className="text-lg">Start Interview</span>
               </>
             )}
           </button>
