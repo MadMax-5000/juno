@@ -1,29 +1,26 @@
 # 🎤 Juno
 
-An AI-powered app to help you practice and prepare for technical interviews through dynamic question generation, real-time feedback, and a modern developer-friendly interface.
+An AI-powered app that helps you practice and prepare for technical, behavioral, or mixed interviews through assessments, interview question generation, and real-time feedback — all within a modern, clean, and user-friendly interface.
 
----
-
-## 🤖 Introduction
-
-This project is built with **Next.js**, **React**, **Firebase** for authentication, **Zod** for validation, and **Tailwind CSS** for styling. It simulates technical interviews with the help of AI, giving you instant feedback and helping you grow your problem-solving skills in a realistic, interactive way.
 ---
 
 ## ⚙️ Tech Stack
 
-- **Next.js** (App Router)
-- **React** & **TypeScript**
-- **Firebase** (Authentication)
-- **Tailwind CSS** (Styling)
-- **Zod** (Validation)
-- **Vapi AI** (Voice Interviews)
-- **Google Gemini** (AI Responses)
+- ⚡️**Next.js (App Router)**
+- ⚛️**React**
+- 📘**TypeScript** 
+- 🔥🔐**Firebase (Authentication)** 
+- 🎨**Tailwind CSS (Styling)** 
+- 🧪✅**Zod (Validation)** 
+- 🎙️🤖**Vapi AI (Voice Interviews)** 
+- 🧠**Google Gemini (AI Responses)** 
 
 ---
 
 ## 🔋 Features
 
 - 🔐 **Authentication**: Sign up and sign in with Firebase.
+- 🧭 **AI-Powered Guidance**: Talk with the AI to identify your ideal job role, tech stack and more.
 - 🎙️ **AI Interviews**: Take interactive mock interviews with a voice-based AI agent.
 - 💬 **Instant Feedback**: Get real-time feedback from the AI on your responses.
 - 🧠 **Smart Question Generation**: Interview questions powered by Google Gemini.
@@ -85,6 +82,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## 🔗 Credit
 
 This project was built with guidance and code snippets from [JavaScript Mastery’s Prepwise tutorial](https://github.com/adrianhajdin/ai_mock_interviews). Special thanks to the JSM community!
-```
-
-Let me know if you want a section for deployment (e.g., Vercel), screenshots, or badges!
