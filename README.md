@@ -85,6 +85,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## 🔗 Credit
 
 This project was built with guidance and code snippets from [JavaScript Mastery’s Prepwise tutorial](https://github.com/adrianhajdin/ai_mock_interviews). Special thanks to the JSM community!
-```
-
-Let me know if you want a section for deployment (e.g., Vercel), screenshots, or badges!
