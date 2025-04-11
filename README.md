@@ -2,7 +2,17 @@
 
 An AI-powered app that helps you practice and prepare for technical, behavioral, or mixed interviews through assessments, interview question generation, and real-time feedback — all within a modern, clean, and user-friendly interface.
 
+## Start the call
+![Demo](public/demo/demo.gif)
+## Take your interview
+![Demo](public/demo/dem.gif)
 ---
+<img src="public/demo/demo (2).png" width="800"/>
+<img src="public/demo/demo (1).png" width="800"/>
+<img src="public/demo/demo (3).png" width="800"/>
+<img src="public/demo/demo (6).png" width="800"/>
+<img src="public/demo/demo (5).png" width="800"/>
+<img src="public/demo/demo (4).png" width="800"/>
 
 ## ⚙️ Tech Stack
 
@@ -22,6 +32,7 @@ An AI-powered app that helps you practice and prepare for technical, behavioral,
 - 🔐 **Authentication**: Sign up and sign in with Firebase.
 - 🧭 **AI-Powered Guidance**: Talk with the AI to identify your ideal job role, tech stack and more.
 - 🎙️ **AI Interviews**: Take interactive mock interviews with a voice-based AI agent.
+- 🔤 **Real time transcription**: See your responses transcribed live during the interview for better clarity and review
 - 💬 **Instant Feedback**: Get real-time feedback from the AI on your responses.
 - 🧠 **Smart Question Generation**: Interview questions powered by Google Gemini.
 - 🖥️ **Dashboard**: Track and manage your interviews.
