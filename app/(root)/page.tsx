@@ -1,9 +1,8 @@
 import { Button } from "@/app/components/ui/button";
-import { dummyInterviews } from "@/constants";
 import Link from "next/link";
 import React from "react";
 import InterviewCard from "../components/InterviewCard";
-import { ArrowRight, PlusCircle } from "lucide-react";
+import { ArrowRight, Plus, Sparkles } from "lucide-react";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
   getInterviewsByUserId,
@@ -18,135 +17,211 @@ const Page = async () => {
   ]);
   const hasPassedInterviews = userInterviews?.length! > 0;
   const hasUpcomingInterviews = latestInterviews?.length! > 0;
+  
   return (
-    <div className="bg-black min-h-screen pb-20">
-      {/* Hero Section */}
-      <section className="w-full max-w-6xl mx-auto px-6 pt-4 pb-8">
-        <div className="bg-gradient-to-br from-[#0c0c0c] to-[#121212] border border-neutral-800 rounded-3xl px-4 py-10 md:px-8 shadow-xl backdrop-blur-sm flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="space-y-6 max-w-2xl">
-            <div className="inline-block bg-black/40 backdrop-blur-md border border-neutral-700 px-4 py-1 rounded-full">
-              <span className="text-[#3ECF8E] text-base font-normal">
-                ✨ AI-Powered Interview Practice
-              </span>
-            </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              Prepare your interviews{" "}
-              <span className="text-[#3ECF8E]">with ease</span>
-            </h1>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Practice on real interview questions and get personalized feedback
-              instantly. Build confidence for your next career opportunity.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Button
-                asChild
-                className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-5 px-8 rounded-xl transition text-base shadow-lg shadow-[#3ECF8E]/20 flex items-center gap-2"
-              >
-                <Link href="/interview">
-                  Start an Interview <ArrowRight size={18} />
-                </Link>
-              </Button>
-            </div>
+    <div className="bg-black min-h-screen text-white antialiased">
+      {/* Navigation */}
+     
+
+      {/* Hero Section - Apple-style minimalism */}
+      <section className="pt-16 pb-12 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center mb-6">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-[#3ECF8E]/10 text-[#3ECF8E] rounded-full px-3 py-1">
+              <Sparkles size={12} /> AI-POWERED INTERVIEW PREPARATION
+            </span>
           </div>
-          <div className="hidden lg:block relative w-72 h-72">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#3ECF8E]/20 to-[#35b87c]/20 rounded-full blur-3xl"></div>
-            <div className="relative z-10 bg-gradient-to-br from-[#3ECF8E] to-[#35b87c] rounded-3xl w-full h-full opacity-90 shadow-2xl flex justify-center items-center">
-              {/* SVG Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 64 64"
-                width="200"
-                height="200"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect
-                  x="16"
-                  y="8"
-                  width="32"
-                  height="48"
-                  rx="4"
-                  fill="#3ECF8E"
-                />
-                <path
-                  d="M20 32l8 8l16 -16"
-                  stroke="white"
-                  strokeWidth="3"
-                  fill="none"
-                />
-                <rect
-                  x="16"
-                  y="8"
-                  width="32"
-                  height="48"
-                  rx="4"
-                  stroke="#2B8F61"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <rect x="25" y="6" width="14" height="4" fill="#2B8F61" />
-              </svg>
+          
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center tracking-tight mb-6">
+            Interview <span className="text-[#3ECF8E]">confidently.</span><br />
+            Succeed <span className="text-[#3ECF8E]">brilliantly.</span>
+          </h1>
+          
+          <p className="text-neutral-400 text-lg md:text-xl text-center max-w-2xl mx-auto mb-10">
+            Practice with intelligent AI that simulates real interviews and provides personalized, actionable feedback to help you land your dream job.
+          </p>
+          
+          <div className="flex justify-center gap-4">
+            <Button
+              asChild
+              className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-6 px-8 rounded-full text-base transition"
+            >
+              <Link href="/interview" className="flex items-center gap-2">
+                Start practicing <ArrowRight size={16} />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              className="bg-transparent border border-neutral-800 hover:border-neutral-700 text-white font-medium py-6 px-8 rounded-full text-base transition"
+            >
+              <Link href="/learn">
+                Learn more
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section - Vercel-style grid */}
+      <section className="py-20 px-6 ">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-2xl border border-neutral-900 bg-black">
+              <div className="size-10 rounded-full bg-[#3ECF8E]/10 flex items-center justify-center mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6C16 3.79 14.21 2 12 2C9.79 2 8 3.79 8 6V11.5C8 13.71 9.79 15.5 12 15.5Z" stroke="#3ECF8E" strokeWidth="2"/>
+                  <path d="M20 11.5C20 15.66 16.42 19 12 19C7.58 19 4 15.66 4 11.5" stroke="#3ECF8E" strokeWidth="2"/>
+                  <path d="M12 19V22" stroke="#3ECF8E" strokeWidth="2"/>
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium mb-2">Voice Analysis</h3>
+              <p className="text-neutral-400 text-sm">Advanced AI evaluates your tone, pace, and clarity to enhance your speaking skills.</p>
+            </div>
+            
+            <div className="p-6 rounded-2xl border border-neutral-900 bg-black">
+              <div className="size-10 rounded-full bg-[#3ECF8E]/10 flex items-center justify-center mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#3ECF8E" strokeWidth="2"/>
+                  <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="#3ECF8E" strokeWidth="2"/>
+                  <path d="M2.67 18.95L7.6 15.64C8.39 15.11 9.53 15.17 10.24 15.78L10.57 16.07C11.35 16.74 12.61 16.74 13.39 16.07L17.55 12.5C18.33 11.83 19.59 11.83 20.37 12.5L22 13.9" stroke="#3ECF8E" strokeWidth="2"/>
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium mb-2">Response Analysis</h3>
+              <p className="text-neutral-400 text-sm">Get instant feedback on your answers with data-driven insights and improvement suggestions.</p>
+            </div>
+            
+            <div className="p-6 rounded-2xl border border-neutral-900 bg-black">
+              <div className="size-10 rounded-full bg-[#3ECF8E]/10 flex items-center justify-center mb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 2V5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M16 2V5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3.5 9.09H20.5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M15.6947 13.7H15.7037" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M15.6947 16.7H15.7037" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M11.9955 13.7H12.0045" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M11.9955 16.7H12.0045" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8.29431 13.7H8.30329" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8.29431 16.7H8.30329" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium mb-2">Industry Templates</h3>
+              <p className="text-neutral-400 text-sm">Practice with role-specific templates from tech, finance, healthcare, and more.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Recent Interviews Section */}
-      <section className="w-full max-w-6xl mx-auto px-6 py-10">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-4xl font-bold text-white">
-            <span className="text-[#3ECF8E]">Recent</span> Interviews
-          </h2>
-          <Link
-            href="/interviews"
-            className="text-[#3ECF8E] hover:text-[#35b87c] flex items-center gap-1 text-sm font-medium"
-          >
-            View all <ArrowRight size={16} />
-          </Link>
-        </div>
+      {/* Recent Interviews Section - Apple-style cards */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-semibold">Your Recent Interviews</h2>
+            <Link
+              href="/interviews"
+              className="text-[#3ECF8E] hover:text-[#35b87c] flex items-center gap-1 text-sm"
+            >
+              View all <ArrowRight size={14} />
+            </Link>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {hasPassedInterviews ? (
-            userInterviews?.map((interview) => (
-              <InterviewCard key={interview.id} {...interview} />
-            ))
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {userInterviews?.map((interview) => (
+                <InterviewCard key={interview.id} {...interview} />
+              ))}
+            </div>
           ) : (
-            <p>You haven&pos;t taken any interviews yet</p>
+            <div className="bg-neutral-950 border border-neutral-900 rounded-2xl p-12 text-center">
+              <div className="size-16 rounded-full bg-neutral-900 flex items-center justify-center mx-auto mb-6">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 5V19" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12H19" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-medium mb-3">No interviews yet</h3>
+              <p className="text-neutral-400 mb-6 max-w-md mx-auto">
+                Start your first practice interview to get personalized feedback and improve your skills.
+              </p>
+              <Button
+                asChild
+                className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-3 px-6 rounded-full text-sm inline-flex items-center gap-2"
+              >
+                <Link href="/interview">
+                  Start your first interview <ArrowRight size={14} />
+                </Link>
+              </Button>
+            </div>
           )}
         </div>
       </section>
 
-      {/* Available Interviews Section */}
-      <section className="w-full max-w-6xl mx-auto px-6 pt-12 pb-6">
-        <div className="bg-gradient-to-br from-neutral-900 to-black rounded-3xl border border-neutral-800 p-8">
+      {/* Available Templates Section - Vercel-style */}
+      <section className="py-20 px-6 bg-neutral-950">
+        <div className="max-w-5xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-white">
-              Available Templates
-            </h2>
+            <h2 className="text-2xl font-semibold">Interview Templates</h2>
             <Button
               asChild
-              className="bg-neutral-800 hover:bg-neutral-700 text-white font-medium px-5 py-2 rounded-xl text-sm flex items-center gap-2 border border-neutral-700"
+              className="bg-black border border-neutral-800 hover:border-neutral-700 text-white font-medium px-4 py-2 rounded-full text-sm flex items-center gap-1.5"
             >
               <Link href="/create">
-                <PlusCircle size={16} /> Create Custom
+                <Plus size={14} /> Custom Template
               </Link>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {hasUpcomingInterviews ? (
-            latestInterviews?.map((interview) => (
-              <InterviewCard key={interview.id} {...interview} />
-            ))
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {latestInterviews?.map((interview) => (
+                <InterviewCard key={interview.id} {...interview} />
+              ))}
+            </div>
           ) : (
-            <p>There are no new interviews available</p>
+            <div className="bg-black border border-neutral-900 rounded-2xl p-12 text-center">
+              <div className="size-16 rounded-full bg-neutral-900 flex items-center justify-center mx-auto mb-6">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 2V5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M16 2V5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3.5 9.09H20.5" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" stroke="#3ECF8E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-medium mb-3">No templates available</h3>
+              <p className="text-neutral-400 mb-6 max-w-md mx-auto">
+                Check back soon for new interview templates or create a custom one tailored to your needs.
+              </p>
+              <Button
+                asChild
+                className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-3 px-6 rounded-full text-sm inline-flex items-center gap-2"
+              >
+                <Link href="/create">
+                  Create template <Plus size={14} />
+                </Link>
+              </Button>
+            </div>
           )}
-          </div>
         </div>
       </section>
+
+      {/* CTA Section - Apple-style simplicity */}
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to ace your next interview?</h2>
+          <p className="text-neutral-400 text-lg mb-10 max-w-2xl mx-auto">
+            Start practicing today and gain the confidence you need to showcase your skills and land your dream job.
+          </p>
+          <Button
+            asChild
+            className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-6 px-10 rounded-full text-base inline-flex items-center gap-2"
+          >
+            <Link href="/interview">
+              Begin Practice <ArrowRight size={16} />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
     </div>
   );
 };

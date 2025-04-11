@@ -7,7 +7,7 @@ import DisplayTechIcons from "./DisplayTechIcons";
 import { Calendar, Star, ArrowUpRight } from "lucide-react";
 
 const InterviewCard = ({
-  interviewId,
+  id,
   userId,
   role,
   type,
@@ -21,7 +21,7 @@ const InterviewCard = ({
   ).format("DD MMM YYYY");
 
   return (
-    <div className=" bg-gradient-to-b from-neutral-900 to-[#0A0A0A] border border-neutral-800 hover:border-[#3ECF8E]/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition duration-300 flex flex-col justify-between h-full">
+    <div className="border border-neutral-800 hover:border-[#3ECF8E]/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition duration-300 flex flex-col justify-between h-full">
       <div className="space-y-5">
         <div className="flex items-center justify-between">
           <div className="relative overflow-hidden rounded-xl">
@@ -32,7 +32,7 @@ const InterviewCard = ({
               height={38}
               className="rounded-xl object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent"></div>
+            <div className="absolute inset-0"></div>
           </div>
           <span className="bg-black/60 backdrop-blur-sm border border-neutral-700 text-white px-3 py-1 rounded-full text-sm font-normal capitalize tracking-wide">
             {normalizedType}
@@ -67,12 +67,12 @@ const InterviewCard = ({
         <Link
           href={
             feedback
-              ? `/interview/${interviewId}/feedback`
-              : `/interview/${interviewId}`
+              ? `/interview/${id}/feedback`
+              : `/interview/${id}`
           }
           className="group-hover:translate-x-1 transition-transform"
         >
-          <Button className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium px-4 py-2 rounded-xl transition flex items-center gap-1 shadow-md shadow-[#3ECF8E]/10">
+          <Button className="cursor-pointer bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium px-4 py-2 rounded-xl transition flex items-center gap-1 shadow-md shadow-[#3ECF8E]/10">
             {feedback ? "View Feedback" : "Start"} <ArrowUpRight size={16} />
           </Button>
         </Link>
