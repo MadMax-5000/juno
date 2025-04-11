@@ -44,20 +44,13 @@ const Page = async () => {
           <div className="flex justify-center gap-4">
             <Button
               asChild
-              className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-6 px-8 rounded-full text-base transition"
+              className="bg-[#3ECF8E] hover:bg-[#35b87c] text-black font-medium py-6 px-8 rounded-lg text-base transition"
             >
               <Link href="/interview" className="flex items-center gap-2">
                 Start practicing <ArrowRight size={16} />
               </Link>
             </Button>
-            <Button
-              asChild
-              className="bg-transparent border border-neutral-800 hover:border-neutral-700 text-white font-medium py-6 px-8 rounded-full text-base transition"
-            >
-              <Link href="/learn">
-                Learn more
-              </Link>
-            </Button>
+            
           </div>
         </div>
       </section>
